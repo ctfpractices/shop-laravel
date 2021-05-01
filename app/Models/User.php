@@ -2,14 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int id
+ * @property string first_name
+ * @property string last_name
+ * @property string email
+ * @property Carbon email_verified_at
+ * @property string password
+ * @property int type
+ * @property string remember_token
+ * @property Carbon created_at
+ * @property Carbon updated_at
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    const TYPE_CUSTOMER = 1;
+    const TYPE_ADMIN = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +32,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'type',
     ];
 
     /**
