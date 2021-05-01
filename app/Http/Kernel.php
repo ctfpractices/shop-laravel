@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsLogin;
 use App\Http\Middleware\IsLogout;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -85,5 +87,7 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
         'IsLogout' => IsLogout::class,
+        'IsLogin' => IsLogin::class,
+        'IsAdmin' => IsAdmin::class,
     ];
 }

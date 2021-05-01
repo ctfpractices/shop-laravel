@@ -12,7 +12,6 @@ use Illuminate\Notifications\Notifiable;
  * @property string first_name
  * @property string last_name
  * @property string email
- * @property Carbon email_verified_at
  * @property string password
  * @property int type
  * @property string remember_token

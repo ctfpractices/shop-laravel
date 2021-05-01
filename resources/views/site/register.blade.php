@@ -16,15 +16,15 @@
         @csrf
         <div class="form-group">
             <label for="first_name">First name:</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name" autocomplete="off">
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name" autocomplete="off" value="{{old('first_name')}}">
         </div>
         <div class="form-group">
             <label for="last_name">Last name:</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" autocomplete="off">
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" autocomplete="off" value="{{old('last_name')}}">
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" autocomplete="off">
+            <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" autocomplete="off" value="{{old('email')}}">
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
