@@ -14,6 +14,11 @@
     <form action="{{route('login')}}" method="post" class="form-data">
         @include('partials.error')
         @csrf
+        @if(session('passwordChanged'))
+            <div class="alert alert-success">
+                Password changed successfully
+            </div>
+        @endif
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="text" class="form-control" id="email" name="email" placeholder="Enter email" autocomplete="off">
@@ -27,7 +32,10 @@
                 <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me"> Remember me
             </label>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="form-group mb-0 d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a href="{{route('recovery.form')}}">Forgot password?</a>
+        </div>
     </form>
 </div>
 

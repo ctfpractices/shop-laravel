@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -79,10 +80,66 @@ class AuthController extends Controller
         ], $request->has('remember_me'));
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->invalidate();
         auth()->logout();
         return redirect()->route('index');
     }
 
+    public function recoveryForm(Request $request)
+    {
+        return view('site.recovery');
+    }
+
+    public function recovery(Request $request)
+    {
+        $this->validateRecovery($request);
+        $response = Password::broker()->sendResetLink($request->only('email'));
+        if ($response === Password::RESET_LINK_SENT) {
+            return back()->with('sent', true);
+        }
+        return back()->withErrors('Please try again');
+    }
+
+    private function validateRecovery(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email:rfc,dns|exists:App\Models\User,email',
+        ]);
+    }
+
+    public function passwordResetForm(string $token, Request $request)
+    {
+        return view('site.password', [
+            'token' => $token,
+            'email' => $request->input('email'),
+        ]);
+    }
+
+    public function passwordReset(Request $request)
+    {
+        $this->validateReset($request);
+
+        $response = Password::broker()->reset(
+            $request->only('token', 'email', 'password', 'password_confirmation'),
+            function ($user, $password) {
+                $user->password = Hash::make($password);
+                $user->save();
+            }
+        );
+
+        return $response === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('passwordChanged', true)
+            : back()->withErrors('Please try again');
+    }
+
+    private function validateReset(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|string',
+            'email' => 'required|email|exists:App\Models\User,email',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    }
 }

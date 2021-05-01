@@ -28,6 +28,12 @@ Route::group(['middleware' => 'IsLogout'], function () {
 
     Route::get('login', [AuthController::class, 'loginForm'])->name('login.form');
     Route::post('login', [AuthController::class, 'login'])->name('login');
+
+    Route::get('recovery', [AuthController::class, 'recoveryForm'])->name('recovery.form');
+    Route::post('recovery', [AuthController::class, 'recovery'])->name('recovery');
+
+    Route::get('password/{token}', [AuthController::class, 'passwordResetForm'])->name('password.reset');
+    Route::post('password', [AuthController::class, 'passwordReset'])->name('reset');
 });
 
 Route::group(['middleware' => 'IsLogin'], function () {
