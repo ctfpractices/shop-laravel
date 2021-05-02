@@ -34,7 +34,10 @@
         </div>
         <div class="form-group mb-0 d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Login</button>
-            <a href="{{route('recovery.form')}}">Forgot password?</a>
+            <div class="d-flex flex-column text-right">
+                <a href="{{route('register.form')}}">I'm new user</a>
+                <a href="{{route('recovery.form')}}">Forgot password?</a>
+            </div>
         </div>
     </form>
 </div>

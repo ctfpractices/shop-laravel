@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+
 class SiteController extends Controller
 {
     public function index()
     {
-        return auth()->check() ? 'You are logged in <a href="' . route('logout') . '">[Logout]</a>' : 'You are visitor';
+        $products = Product::all();
+        return view('site.index', compact('products'));
     }
 }
