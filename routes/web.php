@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [SiteController::class, 'index'])->name('index');
+Route::get('basket/{product}/{number}', [SiteController::class, 'addToBasket'])->where('number', '[0-9]+')->name('basket.add');
 
 Route::group(['middleware' => 'IsAdmin', 'as' => 'admin.'], function () {
     Route::get('admin', [AdminController::class, 'index'])->name('index');
