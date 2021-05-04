@@ -38,5 +38,6 @@ Route::group(['middleware' => 'IsLogout'], function () {
 });
 
 Route::group(['middleware' => 'IsLogin'], function () {
+    Route::get('basket', [SiteController::class, 'basketList'])->name('basket.list');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

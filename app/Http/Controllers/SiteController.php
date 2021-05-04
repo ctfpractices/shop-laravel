@@ -34,7 +34,7 @@ class SiteController extends Controller
         return response()->json($msg);
     }
 
-    public function generateBasketString()
+    private function generateBasketString()
     {
         $basket = Session::get('basket') ?? [];
         $basketCount = array_sum($basket);
@@ -45,5 +45,14 @@ class SiteController extends Controller
             $msg = "($basketCount items)";
         }
         return $msg;
+    }
+
+    public function basketList()
+    {
+        $basket = Session::get('basket') ?? [];
+        $products = Product::whereIn('id', array_keys($basket))->get();
+        $basketCount = $this->generateBasketString();
+
+        return view('site.basket', compact('basket', 'products', 'basketCount'));
     }
 }
