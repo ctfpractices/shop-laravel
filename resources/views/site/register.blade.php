@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div class="container center-container d-flex align-items-center justify-content-center flex-column">
+<div class="container d-flex align-items-center justify-content-center flex-column">
     <h1>Register</h1>
     <form action="{{route('register')}}" method="post" class="form-data">
         @include('partials.error')

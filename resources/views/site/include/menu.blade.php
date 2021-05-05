@@ -10,12 +10,15 @@
                     <a class="nav-link" href="{{route('index')}}">Home</a>
                 </li>
                 @auth
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{route('basket.list')}}">
-                        Cart
-                        <span class="small" @if($basketCount === '')style="display: none;" @endif id="span-basket">{{$basketCount}}</span>
-                    </a>
-                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('profile.show', ['profile_path' => auth()->user()->profile_path])}}">Profile</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('basket.list')}}">
+                            Cart
+                            <span class="small" @if($basketCount === '')style="display: none;" @endif id="span-basket">{{$basketCount}}</span>
+                        </a>
+                    </li>
                 @endauth
             </ul>
             <form class="form-inline my-2 my-lg-0">

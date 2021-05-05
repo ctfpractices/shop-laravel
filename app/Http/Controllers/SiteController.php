@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 class SiteController extends Controller
@@ -54,5 +55,19 @@ class SiteController extends Controller
         $basketCount = $this->generateBasketString();
 
         return view('site.basket', compact('basket', 'products', 'basketCount'));
+    }
+
+    public function showProfile($profilePath)
+    {
+        $user = User::where('profile_path', $profilePath)->first();
+        if(!$user instanceof User){
+            return abort(404);
+        }
+
+        $basketCount = $this->generateBasketString();
+        return view('site.profile', [
+            'profileName' => $user->first_name . ' ' . $user->last_name,
+            'basketCount' => $basketCount,
+        ]);
     }
 }
