@@ -13,6 +13,8 @@ use Illuminate\Notifications\Notifiable;
  * @property string last_name
  * @property string email
  * @property string password
+ * @property string profile_path
+ * @property string social_network_url
  * @property int type
  * @property string remember_token
  * @property Carbon created_at
@@ -35,6 +37,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'profile_path',
+        'social_network_url',
         'type',
     ];
 

@@ -30,6 +30,8 @@ class AuthController extends Controller
             'last_name' => 'required|regex:/^[a-zA-Z]*$/|min:3|max:20',
             'email' => 'required|email:rfc,dns|unique:App\Models\User,email',
             'password' => 'bail|required|min:6|confirmed',
+            'profile_path' => 'required|regex:/^[a-zA-Z]*$/|min:3|max:20|unique:App\Models\User,profile_path',
+            'social_network_url' => 'required|url|unique:App\Models\User,social_network_url',
         ]);
     }
 
@@ -40,6 +42,8 @@ class AuthController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'profile_path' => $data['profile_path'],
+            'social_network_url' => $data['social_network_url'],
             'type' => User::TYPE_CUSTOMER,
         ]);
     }

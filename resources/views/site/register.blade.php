@@ -34,6 +34,16 @@
             <label for="password_confirmation">Retype password:</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Retype password" autocomplete="off">
         </div>
+        <div class="form-group">
+            <label for="profile_path">Profile path:</label>
+            <input type="text" class="form-control" id="profile_path" name="profile_path" placeholder="For example: billgates" autocomplete="off" value="{{old('profile_path')}}">
+            <div class="invalid-feedback d-block text-info">Final url: {{env('APP_URL') . '/@billgates'}}</div>
+        </div>
+        <div class="form-group">
+            <label for="social_network_url">Social network:</label>
+            <input type="text" class="form-control" id="social_network_url" name="social_network_url" placeholder="Enter social network" autocomplete="off" value="{{old('social_network_url')}}">
+            <div class="invalid-feedback d-block text-info">For example: https://instagram.com/billgates</div>
+        </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
